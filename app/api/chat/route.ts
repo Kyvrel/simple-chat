@@ -1,4 +1,4 @@
-import { streamText } from 'ai'
+import { convertToModelMessages, streamText } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
 
 export async function POST(request: Request) {
@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const gemini = createGoogleGenerativeAI()
   const result = await streamText({
     model: gemini('gemini-2.5-flash'),
-    messages: messages,
+    messages: convertToModelMessages(messages),
   })
-  return result.toTextStreamResponse()
+  return result.toUIMessageStreamResponse()
 }
