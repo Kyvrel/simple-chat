@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useChat } from '@ai-sdk/react'
 import { ChatHeader } from '@/components/chat/chat-header'
 import { MessageList } from '@/components/chat/message-list'
 import { ChatInput } from '@/components/chat/chat-input'
+import { convertToModelMessages } from 'ai'
 
 export default function ChatPage() {
   const { messages, sendMessage, status } = useChat()
@@ -24,11 +25,14 @@ export default function ChatPage() {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.target.value)
   }
+  useEffect(() => {
+    console.log('[ChatPage]: messages: ', messages)
+  }, [messages])
 
   return (
     <div className="min-h-screen bg-gray-50">
       <ChatHeader />
-      <MessageList messages={messages} />
+      <MessageList messages={messages} status={status} />
       <ChatInput
         input={input}
         status={status}
