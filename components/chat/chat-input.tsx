@@ -13,14 +13,13 @@ export function ChatInput({
   handleSubmit,
 }: ChatInputProps) {
   return (
-    <div className="fixed bottom-0  left-0 right-0  border-t bg-white p-4 ">
-      <form className="mx-auto flex max-w-3xl gap-2" onSubmit={handleSubmit}>
+    <div className="fixed bottom-0 left-72 right-0 border-t bg-white p-4">
+      <form className="mx-auto flex max-w-4xl gap-2" onSubmit={handleSubmit}>
         <textarea
           name="input"
           autoFocus
           rows={1}
           value={input}
-          disabled={status !== 'ready'}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           className="flex-1 resize-none p-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none"
@@ -28,7 +27,7 @@ export function ChatInput({
         ></textarea>
         <button
           disabled={!input.trim() || status !== 'ready'}
-          className="disabled:bg-gray-200 disabled:text-white px-2 py-1 text-sm rounded-lg bg-black text-white "
+          className="disabled:bg-gray-200 disabled:text-white px-2 py-1 text-base rounded-lg bg-black text-white "
         >
           Send
         </button>
