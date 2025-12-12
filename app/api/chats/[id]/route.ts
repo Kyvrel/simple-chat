@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { chats, messages } from '@/lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { eq, asc } from 'drizzle-orm'
 
 // GET /api/chats/[id] - 获取某个聊天的所有消息
 export async function GET(
@@ -15,7 +15,7 @@ export async function GET(
       .select()
       .from(messages)
       .where(eq(messages.chatId, id))
-      .orderBy(messages.createdAt)
+      .orderBy(asc(messages.createdAt))
 
     return NextResponse.json(chatMessages)
   } catch (error) {
